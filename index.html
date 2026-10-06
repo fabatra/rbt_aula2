@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trilha Didática de Python & Robótica | Prof. Trancoso</title>
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --card-bg: #1e293b;
+      --accent-green: #16a34a;
+      --accent-blue: #0284c7;
+      --neon-cyan: #38bdf8;
+      --text-light: #f8fafc;
+      --border-color: #334155;
+      --warning-gold: #f59e0b;
+      --danger-red: #ef4444;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+    }
+
+    /* HEADER */
+    .header {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border: 2px solid var(--neon-cyan);
+      border-radius: 12px;
+      padding: 25px;
+      text-align: center;
+      margin-bottom: 25px;
+      box-shadow: 0 10px 25px rgba(56, 189, 248, 0.15);
+    }
+
+    .header h1 {
+      color: var(--neon-cyan);
+      margin: 0 0 10px 0;
+      font-size: 1.8rem;
+    }
+
+    .header p {
+      color: #94a3b8;
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    /* VÍDEO INCORPORADO */
+    .video-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 25px;
+    }
+
+    .video-section h2 {
+      color: var(--neon-cyan);
+      margin-top: 0;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%; /* Aspect Ratio 16:9 */
+      height: 0;
+      overflow: hidden;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* BANNER PRESENCIAL */
+    .alert-banner {
+      background: #1e1b4b;
+      border-left: 6px solid #818cf8;
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .alert-banner-icon {
+      font-size: 2.2rem;
+    }
+
+    .alert-banner-text h3 {
+      margin: 0 0 5px 0;
+      color: #a5b4fc;
+      font-size: 1.1rem;
+    }
+
+    .alert-banner-text p {
+      margin: 0;
+      color: #c7d2fe;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    /* BARRA FIXA / COMPILADOR */
+    .compiler-cta {
+      background: linear-gradient(90deg, #0284c7 0%, #16a34a 100%);
+      border-radius: 10px;
+      padding: 15px 20px;
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .compiler-cta h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      color: white;
+    }
+
+    .btn-compiler {
+      background-color: #ffffff;
+      color: #0f172a;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 6px;
+      transition: transform 0.2s, background 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-compiler:hover {
+      transform: scale(1.03);
+      background-color: #f1f5f9;
+    }
+
+    /* NÍVEIS DE DIFICULDADE */
+    .level-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 22px;
+      margin-bottom: 20px;
+      transition: border-color 0.3s;
+    }
+
+    .level-card:hover {
+      border-color: var(--neon-cyan);
+    }
+
+    .level-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 12px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .level-badge {
+      font-size: 0.85rem;
+      font-weight: bold;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+
+    .badge-1 { background: #06b6d4; color: #000; }
+    .badge-2 { background: #3b82f6; color: #fff; }
+    .badge-3 { background: #8b5cf6; color: #fff; }
+    .badge-4 { background: #f59e0b; color: #000; }
+    .badge-5 { background: #ef4444; color: #fff; }
+
+    .code-block {
+      background-color: #090d16;
+      color: var(--neon-cyan);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 14px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 0.95rem;
+      white-space: pre-wrap;
+      margin: 10px 0;
+    }
+
+    .challenge-box {
+      background-color: #0f172a;
+      border-left: 4px solid var(--accent-green);
+      padding: 12px 15px;
+      border-radius: 4px;
+      margin-top: 15px;
+    }
+
+    .challenge-box h4 {
+      margin: 0 0 5px 0;
+      color: #4ade80;
+    }
+
+    .btn-test {
+      display: inline-block;
+      margin-top: 12px;
+      background-color: var(--accent-blue);
+      color: white;
+      text-decoration: none;
+      padding: 8px 15px;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    .btn-test:hover {
+      background-color: #0369a1;
+    }
+
+    /* AVISO AVALIAÇÃO FINAL */
+    .evaluation-card {
+      background: linear-gradient(135deg, #451a03 0%, #1e293b 100%);
+      border: 2px solid var(--warning-gold);
+      border-radius: 12px;
+      padding: 22px;
+      margin-top: 35px;
+      text-align: center;
+    }
+
+    .evaluation-card h3 {
+      color: #fde047;
+      margin-top: 0;
+      font-size: 1.3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .evaluation-card p {
+      color: #fef08a;
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 0;
+    }
+
+    footer {
+      text-align: center;
+      color: #64748b;
+      font-size: 0.85rem;
+      margin-top: 40px;
+      padding-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- CABEÇALHO DA TRILHA -->
+  <div class="header">
+    <h1>🐍 Trilha Didática de Python & Robótica</h1>
+    <p>Canal <b>@professortrancoso</b> | Programação Prática por Níveis de Dificuldade</p>
+  </div>
+
+  <!-- SEÇÃO DO VÍDEO INCORPORADO -->
+  <div class="video-section">
+    <h2>🎬 Vídeo de Apoio da Aula: Conceitos e Prática em Python</h2>
+    <div class="video-wrapper">
+      <iframe 
+        src="https://www.youtube.com/embed/EoWo0jC7Fck" 
+        title="Aula de Python e Robótica com Prof. Trancoso" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+  <!-- AVISO DA AULA PRESENCIAL (CARRINHO LEGO) -->
+  <div class="alert-banner">
+    <div class="alert-banner-icon">🚚</div>
+    <div class="alert-banner-text">
+      <h3>Aviso Importante - Prática na Bancada!</h3>
+      <p>Lembre-se: em nossas <b>aulas presenciais</b>, vamos construir juntos o <b>Carrinho de Entrega LEGO® SPIKE™ Prime</b> equipado com o <b>Sensor Ultrassônico</b>. Testaremos cada um desses comandos diretamente no hardware do robô!</p>
+    </div>
+  </div>
+
+  <!-- CHAMADA COMPILADOR ONLINE -->
+  <div class="compiler-cta">
+    <h3>🌐 Pratique agora no Compilador Oficial da Aula:</h3>
+    <a href="https://fabatra.github.io/compilador" target="_blank" class="btn-compiler">
+      ⚡ Abrir Compilador Python ➔
+    </a>
+  </div>
+
+  <!-- NÍVEL 1 -->
+  <div class="level-card">
+    <div class="level-header">
+      <h3 style="margin:0; color:var(--text-light);">Nível 1: Comunicação Básica (<code>print</code> e <code>input</code>)</h3>
+      <span class="level-badge badge-1">Iniciante</span>
+    </div>
+    <p>Neste primeiro nível, aprendemos a enviar dados para a tela com <code>print()</code> e a receber digitações do usuário com <code>input()</code>.</p>
+    
+    <div class="code-block"># Exemplo Nível 1:
+nome = input("Digite o nome do operador do robô: ")
+print("Olá,", nome, "! Sistema pronto para rodar.")</div>
+
+    <div class="challenge-box">
+      <h4>🎯 Desafio Nível 1:</h4>
+      <p>Crie um programa que pergunte o nome da sua escola e a sua turma, e exiba uma mensagem de boas-vindas completa!</p>
+      <a href="https://fabatra.github.io/compilador" target="_blank" class="btn-test">Testar no Compilador 💻</a>
+    </div>
+  </div>
+
+  <!-- NÍVEL 2 -->
+  <div class="level-card">
+    <div class="level-header">
+      <h3 style="margin:0; color:var(--text-light);">Nível 2: Tomada de Decisão (<code>if / elif / else</code>)</h3>
+      <span class="level-badge badge-2">Intermediário</span>
+    </div>
+    <p>O robô precisa tomar decisões! Usamos condições numéricas para saber se o carrinho deve acelerar ou parar.</p>
+
+    <div class="code-block"># Exemplo Nível 2:
+distancia = float(input("Digite a distância do obstáculo (cm): "))
+
+if distancia <= 10.0:
+    print("🛑 PERIGO: Parar motores!")
+elif distancia <= 30.0:
+    print("🟡 ATENÇÃO: Reduzir velocidade.")
+else:
+    print("🟢 LIBERADO: Caminho livre.")</div>
+
+    <div class="challenge-box">
+      <h4>🎯 Desafio Nível 2:</h4>
+      <p>Modifique a condição para que, se a distância for exatamente igual a 0, o programa avise: "⚠️ ERRO DE LEITURA DO SENSOR!".</p>
+      <a href="https://fabatra.github.io/compilador" target="_blank" class="btn-test">Testar no Compilador 💻</a>
+    </div>
+  </div>
+
+  <!-- NÍVEL 3 -->
+  <div class="level-card">
+    <div class="level-header">
+      <h3 style="margin:0; color:var(--text-light);">Nível 3: Repetição Contínua (<code>while True</code> e <code>break</code>)</h3>
+      <span class="level-badge badge-3">Avançado</span>
+    </div>
+    <p>Para o robô ficar vigiando a porta continuamente, usamos um loop infinito. O comando <code>break</code> serve como botão de emergência!</p>
+
+    <div class="code-block"># Exemplo Nível 3:
+while True:
+    comando = input("Digite 'parar' para desligar o robô ou 'rodar' para continuar: ")
+    if comando == "parar":
+        print("🤖 Robô desligado com segurança.")
+        break
+    print("🚚 Robô em movimento...")</div>
+
+    <div class="challenge-box">
+      <h4>🎯 Desafio Nível 3:</h4>
+      <p>Crie um loop que continue rodando até que o usuário digite a senha correta "1234" para liberar o carrinho.</p>
+      <a href="https://fabatra.github.io/compilador" target="_blank" class="btn-test">Testar no Compilador 💻</a>
+    </div>
+  </div>
+
+  <!-- NÍVEL 4 -->
+  <div class="level-card">
+    <div class="level-header">
+      <h3 style="margin:0; color:var(--text-light);">Nível 4: Proteção contra Falhas (<code>try / except</code> e <code>random</code>)</h3>
+      <span class="level-badge badge-4">Pro</span>
+    </div>
+    <p>O tratamento de exceções impede que o robô trave se o usuário digitar letras no lugar de números. O módulo <code>random</code> sorteia valores aleatórios.</p>
+
+    <div class="code-block"># Exemplo Nível 4:
+import random
+
+entrada = input("Digite a leitura do sensor (número): ")
+
+try:
+    valor = int(entrada)
+    print("✅ Leitura válida:", valor, "cm")
+    print("🎲 Sorteio de rota alternativa:", random.randint(1, 3))
+except ValueError:
+    print("⚠️ ERRO: Digite apenas números inteiros!")</div>
+
+    <div class="challenge-box">
+      <h4>🎯 Desafio Nível 4:</h4>
+      <p>Combine o <code>try/except</code> dentro de um <code>while True</code> para obrigar o usuário a digitar um número válido sem que o programa quebre.</p>
+      <a href="https://fabatra.github.io/compilador" target="_blank" class="btn-test">Testar no Compilador 💻</a>
+    </div>
+  </div>
+
+  <!-- NÍVEL 5 (DESAFIO FINAL) -->
+  <div class="level-card" style="border: 2px solid var(--danger-red);">
+    <div class="level-header">
+      <h3 style="margin:0; color:#fca5a5;">Nível 5: Projeto Campainha Acessível (Sequência de Fibonacci)</h3>
+      <span class="level-badge badge-5">Mestre</span>
+    </div>
+    <p>O desafio final do nosso projeto! Criar um padrão de iluminação visual rítmico para pessoas com deficiência auditiva usando a Sequência de Fibonacci.</p>
+
+    <div class="code-block"># Exemplo Nível 5 (Projeto Integrador):
+# Termos de Fibonacci: 1, 1, 2, 3, 5
+padrão_fibonacci =
+
+print("🔔 Simulador da Campainha Acessível para Surdos")
+
+for piscadas in padrão_fibonacci:
+    print("⚡ LED pisca", piscadas, "vez(es) no ritmo visual...")
+
+print("✅ Sinalização concluída!")</div>
+
+    <div class="challenge-box" style="border-left-color: var(--danger-red);">
+      <h4 style="color:#fca5a5;">🎯 Desafio Mestre:</h4>
+      <p>Adicione um <code>if</code> antes do laço `for` para que o padrão de Fibonacci só seja executado se o sensor detectar uma presença a menos de 15 cm!</p>
+      <a href="https://fabatra.github.io/compilador" target="_blank" class="btn-test" style="background-color: var(--danger-red);">Resolver Desafio no Compilador 🚀</a>
+    </div>
+  </div>
+
+  <!-- CARD DE AVISO DA AVALIAÇÃO PRESENCIAL -->
+  <div class="evaluation-card">
+    <h3>⚠️ ATENÇÃO: AVALIAÇÃO PRESENCIAL INDIVIDUAL</h3>
+    <p>Ao final deste ciclo de aulas, realizaremos uma <b>Avaliação Prática Individual e Presencial</b>. Esta será a nossa <b>1ª NOTA DO 3º TRIMESTRE</b>!<br>
+    Utilize todos os níveis desta trilha e o compilador online para praticar, tirar dúvidas e garantir um excelente desempenho!</p>
+  </div>
+
+  <!-- RODAPÉ -->
+  <footer>
+    <p>Desenvolvido para as turmas da 1ª e 2ª Série do Ensino Médio | <b>Prof. Trancoso (@professortrancoso)</b></p>
+    <p>Link do Compilador: <a href="https://fabatra.github.io/compilador" target="_blank" style="color:var(--neon-cyan);">fabatra.github.io/compilador</a></p>
+  </footer>
+
+</div>
+
+</body>
+</html>
